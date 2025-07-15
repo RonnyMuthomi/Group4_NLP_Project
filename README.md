@@ -56,37 +56,132 @@ Further inspection of the tweets by product category showed how sentiment varied
 
 <img width="1366" height="547" alt="image" src="https://github.com/user-attachments/assets/8c6d5cfa-823f-4979-82b0-6ddaeee9304c" />
 
+## 📊 Key Visuals from Modeling Phase
+
+Here are the most important visuals created during the modeling and evaluation phase, which help explain model performance, feature influence, and generalization:
+
+---
+
+### ✅ Confusion Matrix
+Shows how well the final model predicted each sentiment class, highlighting where misclassifications occurred.
+
+![Confusion Matrix](images/confusion_matrix.png)
+
+---
+
+### 📄 Classification Report Heatmap
+Detailed per-class precision, recall, and F1-score — especially important because of class imbalance.
+
+![Classification Report](images/classification_report.png)
+
+---
+
+### 🧠 Top Influential Features
+The most influential words (positive or negative coefficients) driving predictions in the Logistic Regression model.
+
+![Feature Importance](images/feature_importance.png)
+
+---
+
+### 📈 Learning Curve
+Training vs. validation score as dataset size increases; helps detect overfitting or underfitting.
+
+![Learning Curve](images/learning_curve.png)
+
+---
+
+### 🚀 ROC Curve (Macro-average)
+Shows the model's ability to separate classes; useful for evaluating performance beyond accuracy.
+
+![ROC Curve](images/roc_curve.png)
+
+---
+
+### 📊 Model Comparison
+Comparison of weighted F1-scores across tested models (e.g., Logistic Regression, SVM, Naive Bayes, Random Forest).
+
+![Model Comparison](images/model_comparison.png)
+
+---
+
+> These visuals help justify the choice of the final model, show how well it generalizes, and provide insights into which features matter most for sentiment classification.
+
+
+
 
 ## Modeling
 
-For the modeling phase, the processed_tweet column containing cleaned and preprocessed tweet text served as the main input (X), and the sentiment column was used as the target variable (y). To begin, a baseline Logistic Regression model was implemented due to its simplicity, interpretability, and strong performance in text classification tasks. The text was first vectorized using TF-IDF, which transformed each tweet into a numerical feature vector based on the importance of terms across the corpus.
+For the modeling phase, we used the `processed_tweet` column containing cleaned and preprocessed tweet text as input features (X), and the `sentiment` column as the target variable (y).  
+As a starting point, we implemented a baseline **Logistic Regression** model because of its simplicity, interpretability, and proven effectiveness in text classification.
 
-To improve model performance, hyperparameter tuning was performed using GridSearchCV. This allowed systematic exploration of parameters such as regularization strength (C) and solver options to reduce overfitting and improve generalization. Once tuned, the Logistic Regression model was evaluated and showed good accuracy, especially on majority classes.
+The text data was vectorized using **TF-IDF** (Term Frequency–Inverse Document Frequency), transforming each tweet into a numerical feature vector that captures the importance of words across the corpus.
 
-To benchmark performance, additional models such as Naive Bayes, Support Vector Machines (SVM), and Random Forest Classifiers were tested. Each model was evaluated using accuracy, precision, recall, and F1-score, with special focus on weighted F1-score due to class imbalance. Among them, Logistic Regression and SVM showed the most consistent and reliable results on both training and test data.
+---
 
-## Evaluation
+###  Benchmarking Multiple Models
 
-Model evaluation focused on both overall performance and how well minority sentiment classes were captured. Given the imbalance in sentiment labels, weighted F1-score was chosen as the primary evaluation metric, since it balances precision and recall across all classes proportionally. The confusion matrix revealed that most misclassifications occurred between neutral and positive classes, which often share similar vocabulary, making them harder to distinguish.
+To benchmark performance, we trained and compared several machine learning models:
+- Logistic Regression
+- Random Forest
+- Naive Bayes
+- K-Nearest Neighbors (KNN)
+- XGBoost
 
-While the accuracy metric gave a general sense of correctness, deeper insights came from looking at per-class metrics. The model achieved higher precision and recall for the "Positive" and "No emotion" classes, but struggled slightly with the "Negative" and "I can't tell" sentiments. These results were expected, given the limited representation of those classes in the dataset.
+Each model was built as a pipeline:
+1. TF-IDF vectorizer to transform text
+2. Classifier as the final estimator
 
-## Hyperparameter Tuning
+---
 
-To further refine the model, GridSearchCV was used to search over a range of parameters. For the Logistic Regression model, key parameters such as the regularization strength (C) and penalty (l2) were explored. Additionally, TF-IDF vectorizer parameters like ngram_range, min_df, and max_df were tuned to find the most informative set of textual features. These changes led to modest but meaningful improvements in performance, especially in balancing recall across all sentiment categories.
+###  Evaluation & Metrics
 
-The grid search process ensured that the final model was not only accurate but also generalizable, avoiding overfitting to training data and maintaining strong performance on unseen tweets.
+All models were evaluated on the test set using:
+- **Accuracy** – overall correctness
+- **Precision, Recall, F1-score** – to balance false positives and false negatives
+- **Weighted F1-score** – chosen as the primary metric due to class imbalance (to give fair weight to minority classes)
 
-## Final Model Selection
+**Best results:**
+| Model                | Accuracy | Weighted F1-score |
+|---------------------|:--------:|:-----------------:|
+| Random Forest       | ~0.68    | ~0.66             |
+| Logistic Regression | ~0.67    | ~0.64             |
+| XGBoost             | ~0.66    | ~0.63             |
+| Naive Bayes         | ~0.65    | ~0.62             |
+| KNN                 | ~0.64    | ~0.59             |
 
-After evaluating multiple models and tuning their parameters, Logistic Regression with TF-IDF vectorization was selected as the final model. It achieved the best balance between interpretability, computational efficiency, and predictive power. The model handled the imbalanced classes reasonably well, especially after applying weighting strategies and careful feature engineering.
+The **Random Forest** pipeline achieved the best overall accuracy (~68%) and balanced performance across sentiment classes.
 
-This final model was capable of accurately classifying tweet sentiment based on the content of the text, fulfilling the primary objective of the project.
+---
+
+### Hyperparameter Tuning
+
+To boost performance, we performed **GridSearchCV** tuning:
+- For Logistic Regression: regularization strength `C`, penalty type, solver
+- For Random Forest: number of estimators, max depth, and class weighting
+- For KNN: number of neighbors, distance metric
+- For Naive Bayes: smoothing parameter `alpha`
+- For XGBoost: learning rate, number of estimators, max depth
+
+Tuning led to meaningful improvements, particularly in recall for minority sentiment classes.
+
+---
+
+###  Final Model Selection
+
+After comparing models, **Random Forest with TF-IDF** vectorization was selected as the final model.  
+Reasons:
+- Best trade-off between accuracy and F1-score
+- Robust performance on unseen data
+- Ability to handle class imbalance better after tuning
+
+The final model achieved:
+- **Accuracy:** ~0.68
+- **Weighted F1-score:** ~0.66
+
+---
 
 ## Conclusion
 
-This project successfully demonstrated the application of Natural Language Processing (NLP) techniques to classify tweet sentiment using machine learning. Starting with raw, noisy Twitter data, the pipeline involved systematic text preprocessing cleaning, tokenization, stop word removal, stemming and transforming the text into numerical vectors via TF-IDF. Through rigorous modeling and hyperparameter tuning, the best-performing model was selected based on weighted F1-score, ensuring fair evaluation across all sentiment classes.
-
-The final model can now predict whether a tweet expresses positive, negative, neutral, or ambiguous emotion toward a product or brand, providing valuable insights for businesses, marketers, or researchers analyzing public sentiment. Future improvements may include integrating deep learning techniques or using contextual embeddings like BERT for even better performance on subtle linguistic cues.
-
+By systematically preprocessing text, building pipelines, tuning hyperparameters, and evaluating multiple models, the project successfully built a robust text classifier.  
+This model can now predict whether a tweet expresses positive, negative, neutral, or uncertain emotion, helping businesses and analysts gain insights from social media sentiment.
 

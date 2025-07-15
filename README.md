@@ -56,59 +56,7 @@ Further inspection of the tweets by product category showed how sentiment varied
 
 <img width="1366" height="547" alt="image" src="https://github.com/user-attachments/assets/8c6d5cfa-823f-4979-82b0-6ddaeee9304c" />
 
-## 📊 Key Visuals from Modeling Phase
-
-Here are the most important visuals created during the modeling and evaluation phase, which help explain model performance, feature influence, and generalization:
-
 ---
-
-### ✅ Confusion Matrix
-Shows how well the final model predicted each sentiment class, highlighting where misclassifications occurred.
-
-![Confusion Matrix](images/confusion_matrix.png)
-
----
-
-### 📄 Classification Report Heatmap
-Detailed per-class precision, recall, and F1-score — especially important because of class imbalance.
-
-![Classification Report](images/classification_report.png)
-
----
-
-### 🧠 Top Influential Features
-The most influential words (positive or negative coefficients) driving predictions in the Logistic Regression model.
-
-![Feature Importance](images/feature_importance.png)
-
----
-
-### 📈 Learning Curve
-Training vs. validation score as dataset size increases; helps detect overfitting or underfitting.
-
-![Learning Curve](images/learning_curve.png)
-
----
-
-### 🚀 ROC Curve (Macro-average)
-Shows the model's ability to separate classes; useful for evaluating performance beyond accuracy.
-
-![ROC Curve](images/roc_curve.png)
-
----
-
-### 📊 Model Comparison
-Comparison of weighted F1-scores across tested models (e.g., Logistic Regression, SVM, Naive Bayes, Random Forest).
-
-![Model Comparison](images/model_comparison.png)
-
----
-
-> These visuals help justify the choice of the final model, show how well it generalizes, and provide insights into which features matter most for sentiment classification.
-
-
-
-
 ## Modeling
 
 For the modeling phase, we used the `processed_tweet` column containing cleaned and preprocessed tweet text as input features (X), and the `sentiment` column as the target variable (y).  
@@ -163,6 +111,27 @@ To boost performance, we performed **GridSearchCV** tuning:
 - For XGBoost: learning rate, number of estimators, max depth
 
 Tuning led to meaningful improvements, particularly in recall for minority sentiment classes.
+
+##  Key Visuals from Modeling Phase
+
+ **Confusion Matrix**  
+<img width="600" alt="Confusion Matrix" src="images/confusion_matrix.png" />
+
+ **Classification Report Heatmap**  
+<img width="600" alt="Classification Report" src="images/classification_report.png" />
+
+ **Top Influential Features (Logistic Regression)**  
+<img width="600" alt="Feature Importance" src="images/feature_importance.png" />
+
+ **Learning Curve**  
+<img width="600" alt="Learning Curve" src="images/learning_curve.png" />
+
+ **ROC Curve (Macro-average)**  
+<img width="600" alt="ROC Curve" src="images/roc_curve.png" />
+
+ **Model Comparison (Weighted F1-score across models)**  
+<img width="600" alt="Model Comparison" src="images/model_comparison.png" />
+
 
 ---
 

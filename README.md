@@ -114,12 +114,10 @@ Tuning led to meaningful improvements, particularly in recall for minority senti
 
 ##  Key Visuals from Modeling Phase
 
- **Confusion Matrix**  
-<img width="600" alt="Confusion Matrix" src="images/confusion_matrix.png" />
-
+ 
  **Classification Report Heatmap**  
  
-<img width="758" height="656" alt="image" src="https://github.com/user-attachments/assets/4178c42f-8db0-463d-adec-27136439e766" />
+<img width="710" height="590" alt="image" src="https://github.com/user-attachments/assets/2e603426-f3a3-4985-9a93-97863a44bf72" />
 
 
  **Top Influential Features (Logistic Regression)**  

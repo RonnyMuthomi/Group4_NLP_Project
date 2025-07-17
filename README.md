@@ -118,20 +118,15 @@ Tuning led to meaningful improvements, particularly in recall for minority senti
 <img width="600" alt="Confusion Matrix" src="images/confusion_matrix.png" />
 
  **Classification Report Heatmap**  
-<img width="600" alt="Classification Report" src="images/classification_report.png" />
+ 
+<img width="758" height="656" alt="image" src="https://github.com/user-attachments/assets/4178c42f-8db0-463d-adec-27136439e766" />
+
 
  **Top Influential Features (Logistic Regression)**  
-<img width="600" alt="Feature Importance" src="images/feature_importance.png" />
+<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/e13c480f-b996-4540-a52f-897256cc8758" />
 
  **Learning Curve**  
-<img width="600" alt="Learning Curve" src="images/learning_curve.png" />
-
- **ROC Curve (Macro-average)**  
-<img width="600" alt="ROC Curve" src="images/roc_curve.png" />
-
- **Model Comparison (Weighted F1-score across models)**  
-<img width="600" alt="Model Comparison" src="images/model_comparison.png" />
-
+<img width="989" height="790" alt="image" src="https://github.com/user-attachments/assets/9f5e2bab-e5e1-4a8e-87ec-2ff6f4673580" />
 
 ---
 

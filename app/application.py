@@ -89,8 +89,8 @@ st.markdown("""
 
 
 # Load your trained pipeline
-pipeline = joblib.load("../models/random_forest_model.pkl")
-
+model_path = os.path.join(os.path.dirname(__file__), "..", "models", "random_forest_model.pkl")
+pipeline = joblib.load(model_path)
 # Set page config
 st.set_page_config(page_title="Tweet Sentiment Analyzer", layout="wide")
 
